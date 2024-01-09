@@ -3,6 +3,26 @@ const otpGenerator = require('../index')
 require('should')
 
 describe('OTP Generator Tests', function () {
+  /* New Tests */
+  it('it should return 10 digits and uppercase alphabets when options is { lowerCaseAlphabets: false, specialChars: false }', function (done) {
+    const otp = otpGenerator.generate(null, { digits: true, lowerCaseAlphabets: false, upperCaseAlphabets: true, specialChars: false })
+    console.log(otp)
+    otp.length.should.equal(10);
+    /^[0-9A-Z]+$/.test(otp).should.equal(true);
+    /^[a-z#!&@]+$/.test(otp).should.equal(false)
+    done()
+  })
+
+  it('it should return 8 digits and alphabets when length of the password = 8 and options is { specialChars: false}', function (done) {
+    const otp = otpGenerator.generate(8, { digits: true, lowerCaseAlphabets: true, upperCaseAlphabets: true, specialChars: false })
+    console.log(otp)
+    otp.length.should.equal(8);
+    /^[0-9a-zA-Z]+$/.test(otp).should.equal(true);
+    /^[#!&@]+$/.test(otp).should.equal(false)
+    done()
+  })
+
+  /* Previous Tests */
   it('it should return 10 digit when length of password and options is not specified', function (done) {
     const otp = otpGenerator.generate()
     console.log(otp)
