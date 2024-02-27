@@ -20,12 +20,16 @@ module.exports = {
    */
   generate: function (length, options) {
     length = length || 10
-    const generateOptions = options || {}
+    /* Old code
+      const generateOptions = options || {}
+      generateOptions.digits = Object.prototype.hasOwnProperty.call(generateOptions, 'digits') ? options.digits : true
+      generateOptions.lowerCaseAlphabets = Object.prototype.hasOwnProperty.call(generateOptions, 'lowerCaseAlphabets') ? options.lowerCaseAlphabets : true
+      generateOptions.upperCaseAlphabets = Object.prototype.hasOwnProperty.call(generateOptions, 'upperCaseAlphabets') ? options.upperCaseAlphabets : true
+      generateOptions.specialChars = Object.prototype.hasOwnProperty.call(generateOptions, 'specialChars') ? options.specialChars : true
+    */
 
-    generateOptions.digits = Object.prototype.hasOwnProperty.call(generateOptions, 'digits') ? options.digits : true
-    generateOptions.lowerCaseAlphabets = Object.prototype.hasOwnProperty.call(generateOptions, 'lowerCaseAlphabets') ? options.lowerCaseAlphabets : true
-    generateOptions.upperCaseAlphabets = Object.prototype.hasOwnProperty.call(generateOptions, 'upperCaseAlphabets') ? options.upperCaseAlphabets : true
-    generateOptions.specialChars = Object.prototype.hasOwnProperty.call(generateOptions, 'specialChars') ? options.specialChars : true
+    /* New code */
+    const generateOptions = { digits: true, lowerCaseAlphabets: true, upperCaseAlphabets: true, specialChars: true, ...options }
 
     const allowsChars = ((generateOptions.digits || '') && digits) +
       ((generateOptions.lowerCaseAlphabets || '') && lowerCaseAlphabets) +
